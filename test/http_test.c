@@ -859,7 +859,11 @@ static const RESP_TEST_FIXTURE split_resp_tests[] = {
         .max_hdr_lines = 2,
         .exp_ret = 0,
         .exp_reason = HTTP_R_RESPONSE_TOO_MANY_HDRLINES },
-    /* text Content-Type on status 200 while ASN.1 is expected */
+    /*-
+     * Text Content-Type on status 200 while ASN.1 is expected.
+     * The piecemeal case checks that the status code is preserved across
+     * calls when validating the Content-Type header.
+     */
     { RESP("HTTP/1.1 200 OK\r\n"
            "Content-Type: text/plain\r\n"
            "\r\n"),
